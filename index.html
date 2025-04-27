@@ -12,7 +12,7 @@
     }
     body { background: #f9f9f9; color: #333; }
     header {
-      background: #4CAF50; /* Changed to a more vibrant color */
+      background: #4CAF50; 
       color: #fff;
       padding: 2rem;
       text-align: center;
@@ -27,13 +27,13 @@
     }
     nav a {
       margin: 0 1rem;
-      color: #4CAF50; /* Match the header color */
+      color: #4CAF50; 
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s;
     }
     nav a:hover {
-      color: #333; /* Darker color on hover */
+      color: #333; 
     }
     .products {
       display: grid;
@@ -57,18 +57,18 @@
     }
     .product-content {
       padding: 1rem;
-      background: #fff; /* Added background for better contrast */
+      background: #fff; 
     }
     .product-content h3 { margin-bottom: 0.5rem; }
     .product-content p { font-size: 0.9rem; margin-bottom: 0.5rem; }
-    .product-price { font-weight: bold; color: #FF5722; } /* Changed price color */
+    .product-price { font-weight: bold; color: #FF5722; }
     section {
       padding: 2rem;
-      max-width: 1200px; /* Increased max-width for better layout */
+      max-width: 1200px; 
       margin: auto;
     }
     footer {
-      background: #4CAF50; /* Match footer with header */
+      background: #4CAF50;
       color: #fff;
       text-align: center;
       padding: 1rem;
@@ -82,7 +82,7 @@
       border-radius: 5px;
     }
     form button {
-      background: #FF5722; /* Changed button color */
+      background: #FF5722;
       color: #fff;
       border: none;
       padding: 0.75rem 2rem;
@@ -91,7 +91,7 @@
       transition: background 0.3s;
     }
     form button:hover {
-      background: #E64A19; /* Darker shade on hover */
+      background: #E64A19; 
     }
   </style>
 </head>
@@ -114,4 +114,63 @@
 
   <section id="about">
     <h2>About Us</h2>
-    <p>P & D
+    <p>P & D Essentials is your go-to store for a variety of high-quality, everyday products. We focus on providing essential items that meet your needs with convenience, reliability, and style. Whether you’re looking for home goods, gadgets, or lifestyle products, we have something for everyone. Our goal is to make shopping easier and more enjoyable for our customers.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form action="#" method="post">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your name" />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="Enter your email" />
+      
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
+      
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 P & D Essentials. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const sheetId = '1B8Ayk10CEHeDZew3Fl7MyyJXDhHHvj4V-VqEKqTA2E8';
+    const apiUrl = `https://spreadsheets.google.com/feeds/list/${sheetId}/od6/public/values?alt=json`;
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const products = data.feed.entry;
+        const productList = document.getElementById('product-list');
+        
+        products.forEach(product => {
+          const title = product['gsx$title'].$t; // Assuming 'title' column
+          const description = product['gsx$description'].$t; // Assuming 'description' column
+          const price = product['gsx$price'].$t; // Assuming 'price' column
+          const imageUrl = product['gsx$imageurl'].$t; // Assuming 'imageurl' column
+
+          const productCard = document.createElement('div');
+          productCard.classList.add('product-card');
+
+          productCard.innerHTML = `
+            <img src="${imageUrl}" alt="${title}" />
+            <div class="product-content">
+              <h3>${title}</h3>
+              <p>${description}</p>
+              <p class="product-price">${price}</p>
+            </div>
+          `;
+
+          productList.appendChild(productCard);
+        });
+      })
+      .catch(error => {
+        console.error('Error loading products:', error);
+      });
+  </script>
+</body>
+</html>
