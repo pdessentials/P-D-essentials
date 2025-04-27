@@ -177,47 +177,49 @@
                 const productList = document.getElementById('product-list');
 
                 products.forEach(product => {
-                    const title = product['gsx$title'].$t;
+                    const title = product['gsx$producttitle'].$t;
                     const description = product['gsx$description'].$t;
                     const price = product['gsx$price'].$t;
                     const imageUrl = product['gsx$imageurl'].$t;
 
-                    const productCard = document.createElement('div');
-                    productCard.classList.add('product-card');
+                    if (title && description && price && imageUrl) {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('product-card');
 
-                    productCard.innerHTML = `
-                        <img src="${imageUrl}" alt="${title}" />
-                        <div class="product-content">
-                            <h3>${title}</h3>
-                            <p>${description}</p>
-                            <p class="product-price">${price}</p>
-                            <button class="product-button" data-product-name="${title}">Order Now</button>
-                        </div>
-                        <div class="order-form" id="order-form-${title.replace(/\s+/g, '-').toLowerCase()}">
-                            <h3>Order: ${title}</h3>
-                            <form action="https://formspree.io/f/mkgrnlww" method="post">
-                                <label for="customer-name-${title.replace(/\s+/g, '-').toLowerCase()}">Your Name</label>
-                                <input type="text" id="customer-name-${title.replace(/\s+/g, '-').toLowerCase()}" name="customer-name" required>
+                        productCard.innerHTML = `
+                            <img src="${imageUrl}" alt="${title}" />
+                            <div class="product-content">
+                                <h3>${title}</h3>
+                                <p>${description}</p>
+                                <p class="product-price">${price}</p>
+                                <button class="product-button" data-product-name="${title}">Order Now</button>
+                            </div>
+                            <div class="order-form" id="order-form-${title.replace(/\s+/g, '-').toLowerCase()}">
+                                <h3>Order: ${title}</h3>
+                                <form action="https://formspree.io/f/mkgrnlww" method="post">
+                                    <label for="customer-name-${title.replace(/\s+/g, '-').toLowerCase()}">Your Name</label>
+                                    <input type="text" id="customer-name-${title.replace(/\s+/g, '-').toLowerCase()}" name="customer-name" required>
 
-                                <label for="customer-email-${title.replace(/\s+/g, '-').toLowerCase()}">Your Email</label>
-                                <input type="email" id="customer-email-${title.replace(/\s+/g, '-').toLowerCase()}" name="customer-email" required>
+                                    <label for="customer-email-${title.replace(/\s+/g, '-').toLowerCase()}">Your Email</label>
+                                    <input type="email" id="customer-email-${title.replace(/\s+/g, '-').toLowerCase()}" name="customer-email" required>
 
-                                <label for="address-${title.replace(/\s+/g, '-').toLowerCase()}">Address</label>
-                                <textarea id="address-${title.replace(/\s+/g, '-').toLowerCase()}" name="address" rows="3" required placeholder="Enter your address"></textarea>
+                                    <label for="address-${title.replace(/\s+/g, '-').toLowerCase()}">Address</label>
+                                    <textarea id="address-${title.replace(/\s+/g, '-').toLowerCase()}" name="address" rows="3" required placeholder="Enter your address"></textarea>
 
-                                <label for="phone-${title.replace(/\s+/g, '-').toLowerCase()}">Phone Number</label>
-                                <input type="tel" id="phone-${title.replace(/\s+/g, '-').toLowerCase()}" name="phone" placeholder="Enter your phone number">
+                                    <label for="phone-${title.replace(/\s+/g, '-').toLowerCase()}">Phone Number</label>
+                                    <input type="tel" id="phone-${title.replace(/\s+/g, '-').toLowerCase()}" name="phone" placeholder="Enter your phone number">
 
-                                <label for="quantity-${title.replace(/\s+/g, '-').toLowerCase()}">Quantity</label>
-                                <input type="number" id="quantity-${title.replace(/\s+/g, '-').toLowerCase()}" name="quantity" value="1" min="1">
+                                    <label for="quantity-${title.replace(/\s+/g, '-').toLowerCase()}">Quantity</label>
+                                    <input type="number" id="quantity-${title.replace(/\s+/g, '-').toLowerCase()}" name="quantity" value="1" min="1">
 
-                                <input type="hidden" name="product-name" value="${title}">
-                                <button type="submit">Place Order</button>
-                            </form>
-                        </div>
-                    `;
+                                    <input type="hidden" name="product-name" value="${title}">
+                                    <button type="submit">Place Order</button>
+                                </form>
+                            </div>
+                        `;
 
-                    productList.appendChild(productCard);
+                        productList.appendChild(productCard);
+                    }
                 });
 
                 // Add event listeners to "Order Now" buttons
@@ -231,10 +233,10 @@
                             orderForm.style.display = 'block';
                         }
                     });
+                })
+                .catch(error => {
+                    console.error('Error loading products:', error);
                 });
-            })
-            .catch(error => {
-                console.error('Error loading products:', error);
             });
     </script>
 </body>
