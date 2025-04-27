@@ -3,914 +3,298 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>P & D Essentials - Quality Everyday Products</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>P & D Essentials</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/891/891462.png" type="image/png">
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="P & D Essentials - Your one-stop online shop for quality essentials at great prices.">
+  <meta name="keywords" content="P & D Essentials, Online Shopping, Essentials, Best Prices, Fast Delivery, Quality Products">
+  <meta name="author" content="P & D Essentials">
+  <meta property="og:title" content="P & D Essentials - Quality Essentials for You">
+  <meta property="og:description" content="Shop now at P & D Essentials for quality essentials delivered fast and at the best prices.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="YOUR_WEBSITE_URL_HERE">
+  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/891/891462.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --primary: #4CAF50;
-      --primary-dark: #388E3C;
-      --secondary: #FF5722;
-      --secondary-dark: #E64A19;
-      --light: #f8f9fa;
-      --dark: #212529;
-      --gray: #6c757d;
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+      scroll-behavior: smooth;
     }
-    
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-      font-family: 'Poppins', sans-serif; 
-    }
-    
-    body { 
-      background: #f8f9fa; 
-      color: var(--dark); 
-      line-height: 1.6;
-    }
-    
-    /* Header Styles */
+    body { background: #f9f9f9; color: #333; }
     header {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      padding: 2rem 1rem;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    header::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-      transform: rotate(30deg);
-    }
-    
-    header h1 { 
-      font-size: 2.5rem; 
-      margin-bottom: 0.5rem; 
-      font-weight: 700;
-      position: relative;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    }
-    
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      position: relative;
-    }
-    
-    /* Navigation */
-    nav {
-      background: white;
-      padding: 1rem;
+      background: linear-gradient(135deg, #4CAF50, #81C784);
+      color: #fff;
+      padding: 2rem;
       text-align: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      position: sticky; 
-      top: 0; 
+      animation: fadeInDown 1s ease;
+    }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    header p { font-size: 1rem; }
+
+    nav {
+      background: #fff;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
       z-index: 1000;
     }
-    
     nav a {
-      margin: 0 1.2rem;
-      color: var(--primary);
+      margin: 0 1rem;
+      color: #4CAF50;
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.3s;
-      padding: 0.5rem 0;
-      position: relative;
       font-size: 1rem;
+      transition: color 0.3s;
     }
-    
-    nav a:hover { 
-      color: var(--secondary); 
-    }
-    
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--secondary);
-      transition: width 0.3s;
-    }
-    
-    nav a:hover::after {
-      width: 100%;
-    }
-    
-    /* Main Content */
+    nav a:hover { color: #FF5722; }
+
     section {
-      padding: 3rem 1rem;
+      padding: 2rem;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: auto;
+      animation: fadeIn 1.5s ease;
     }
-    
-    section h2 {
+    h2 {
       text-align: center;
-      margin-bottom: 2rem;
-      color: var(--primary-dark);
-      position: relative;
-      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #4CAF50;
+      font-size: 1.8rem;
     }
-    
-    section h2::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 4px;
-      background: var(--secondary);
-      margin: 0.5rem auto 0;
-      border-radius: 2px;
-    }
-    
-    /* Products Grid */
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
-    
     .product-card {
-      background: white;
-      border-radius: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      position: relative;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 1s ease;
     }
-    
     .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
-    
-    .product-image {
-      width: 100%; 
-      height: 220px; 
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .product-image img {
+    .product-card img {
       width: 100%;
-      height: 100%;
+      height: 200px;
       object-fit: cover;
-      transition: transform 0.5s;
     }
-    
-    .product-card:hover .product-image img {
-      transform: scale(1.05);
-    }
-    
-    .product-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--secondary);
-      color: white;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    
     .product-content {
-      padding: 1.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .product-content h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-      color: var(--dark);
-    }
-    
-    .product-content p {
-      font-size: 0.9rem;
-      color: var(--gray);
-      margin-bottom: 1rem;
-      flex-grow: 1;
-    }
-    
-    .product-price {
-      font-weight: 700;
-      color: var(--secondary);
-      margin: 0.5rem 0;
-      font-size: 1.25rem;
-    }
-    
-    .product-rating {
-      color: #FFC107;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-    }
-    
-    .product-button {
-      background: var(--secondary);
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 8px;
-      cursor: pointer;
-      text-align: center;
-      font-weight: 600;
-      transition: all 0.3s;
-      margin-top: 0.5rem;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-    
-    .product-button:hover { 
-      background: var(--secondary-dark); 
-      transform: translateY(-2px);
-    }
-    
-    .product-button i {
-      font-size: 1rem;
-    }
-    
-    /* Order Popup */
-    .order-popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .order-popup.active { 
-      display: flex;
-      opacity: 1;
-    }
-    
-    .order-form {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 500px;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transform: translateY(20px);
-      transition: transform 0.3s;
-    }
-    
-    .order-popup.active .order-form {
-      transform: translateY(0);
-    }
-    
-    .order-form h3 { 
-      margin-bottom: 1.5rem;
-      color: var(--primary-dark);
-      text-align: center;
-    }
-    
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: var(--dark);
-    }
-    
-    .form-control {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border 0.3s;
-    }
-    
-    .form-control:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-    }
-    
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--gray);
-      transition: color 0.3s;
-      background: none;
-      border: none;
-    }
-    
-    .close-btn:hover {
-      color: var(--secondary);
-    }
-    
-    .btn-submit {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      transition: all 0.3s;
-      margin-top: 0.5rem;
-    }
-    
-    .btn-submit:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
-    
-    /* About Section */
-    #about {
-      background: white;
-    }
-    
-    #about p {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-      color: #555;
-    }
-    
-    /* Contact Section */
-    #contact {
-      background: #f1f8e9;
-    }
-    
-    #contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-    
-    /* Footer */
-    footer {
-      background: var(--dark);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 3rem;
-    }
-    
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      text-align: left;
-    }
-    
-    .footer-column h3 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-    
-    .footer-column p, .footer-column a {
-      color: #adb5bd;
-      margin-bottom: 0.5rem;
-      display: block;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    
-    .footer-column a:hover {
-      color: white;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    
-    .social-links a {
-      color: white;
-      background: var(--gray);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-    }
-    
-    .social-links a:hover {
-      background: var(--primary);
-      transform: translateY(-3px);
-    }
-    
-    .copyright {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.9rem;
-      color: #6c757d;
-    }
-    
-    /* Loader */
-    #loader {
-      text-align: center;
-      margin: 2rem 0;
-    }
-    
-    .spinner {
-      width: 40px;
-      height: 40px;
-      margin: 0 auto;
-      border: 4px solid rgba(0,0,0,0.1);
-      border-left-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      header h1 { font-size: 2rem; }
-      nav a { margin: 0 0.75rem; font-size: 0.9rem; }
-      section { padding: 2rem 1rem; }
-      .products { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-    }
-    
-    @media (max-width: 480px) {
-      header h1 { font-size: 1.8rem; }
-      nav a { margin: 0 0.5rem; font-size: 0.85rem; }
-      .product-card { max-width: 100%; }
-    }
-    
-    /* Success Message */
-    .success-message {
-      display: none;
-      background: #d4edda;
-      color: #155724;
       padding: 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      text-align: center;
     }
-    
-    /* Floating Support Button */
-    .support-button {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: var(--secondary);
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 1000;
+    .product-content h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .product-content p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .product-price { font-weight: bold; color: #FF5722; margin-bottom: 0.5rem; }
+    .product-button {
+      background: #FF5722;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 5px;
       cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    .support-button:hover {
-      background: var(--secondary-dark);
-      transform: scale(1.1);
-    }
-    
-    .support-button i {
-      font-size: 1.5rem;
-    }
-    
-    .support-popup {
-      display: none;
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      background: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      width: 300px;
-      z-index: 1001;
-    }
-    
-    .support-popup.active {
-      display: block;
-      animation: fadeInUp 0.3s;
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .support-popup h4 {
-      margin-bottom: 1rem;
-      color: var(--primary-dark);
-    }
-    
-    .support-popup p {
-      margin-bottom: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s;
       font-size: 0.9rem;
     }
-    
-    .support-popup a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-      display: block;
-      margin-top: 0.5rem;
+    .product-button:hover { background: #E64A19; }
+
+    footer {
+      background: #4CAF50;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
     }
-    
-    .support-popup a:hover {
-      text-decoration: underline;
+
+    form input, form textarea {
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
     }
-    
-    .support-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+    form button {
+      background: #FF5722;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 5px;
       cursor: pointer;
-      color: var(--gray);
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    form button:hover { background: #E64A19; }
+
+    .order-form {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 9999;
+      animation: fadeIn 0.5s ease;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(50px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInDown {
+      0% {opacity: 0; transform: translateY(-50px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Mobile Optimization */
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.8rem; }
+      header p { font-size: 1rem; }
+      nav a { margin: 0 0.5rem; font-size: 0.9rem; }
+      h2 { font-size: 1.5rem; }
+      .products { grid-template-columns: 1fr; }
+      .product-card img { height: 180px; }
+      .product-content h3 { font-size: 1rem; }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>P & D Essentials</h1>
-  <p>Premium Quality Products for Your Everyday Needs</p>
-</header>
+<div class="popup" id="popup">Order Placed Successfully!</div>
 
-<nav>
-  <a href="#products"><i class="fas fa-store-alt"></i> Products</a>
-  <a href="#about"><i class="fas fa-info-circle"></i> About</a>
-  <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-</nav>
+  <header>
+    <h1>P & D Essentials</h1>
+    <p>Your one-stop shop for everyday products</p>
+  </header>
 
-<section id="products">
-  <h2>Our Featured Products</h2>
-  <div id="loader">
-    <div class="spinner"></div>
-    <p>Loading our products...</p>
-  </div>
-  <div class="products" id="product-list"></div>
-</section>
+  <nav>
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-<section id="about">
-  <h2>About P & D Essentials</h2>
-  <p>We are committed to bringing you the highest quality everyday essentials at affordable prices. Our carefully curated selection of products is designed to make your life easier and more enjoyable. With a focus on customer satisfaction, we ensure every purchase meets your expectations.</p>
-</section>
+  <section id="products">
+    <h2>Our Products</h2>
+    <div class="products" id="product-list"></div>
+  </section>
 
-<section id="contact">
-  <h2>Get In Touch</h2>
-  <form id="contact-form" action="https://formspree.io/f/mkgrnlww" method="POST">
-    <div class="form-group">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="email">Your Email</label>
-      <input type="email" id="email" name="email" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="message">Your Message</label>
-      <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
-    </div>
-    <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send Message</button>
-    <div id="contact-success" class="success-message">
-      Your message has been sent successfully! We'll get back to you soon.
-    </div>
-  </form>
-</section>
+  <section id="about">
+    <h2>About Us</h2>
+    <p style="text-align:center;">P & D Essentials is your go-to store for a variety of high-quality, everyday products. We focus on providing essential items that meet your needs with convenience, reliability, and style.</p>
+  </section>
 
-<!-- Order Popup -->
-<div class="order-popup" id="order-popup">
-  <div class="order-form">
-    <button class="close-btn" id="close-popup">&times;</button>
-    <h3 id="order-title">Order Product</h3>
-    <form id="popup-form" action="https://formspree.io/f/mkgrnlww" method="POST">
-      <input type="hidden" name="form-type" value="product-order">
-      <div class="form-group">
-        <label for="customer-name">Full Name</label>
-        <input type="text" id="customer-name" name="customer-name" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="customer-email">Email Address</label>
-        <input type="email" id="customer-email" name="customer-email" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="address">Shipping Address</label>
-        <textarea id="address" name="address" rows="3" class="form-control" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" required>
-      </div>
-      <input type="hidden" name="product-name" id="product-name-field">
-      <button type="submit" class="btn-submit"><i class="fas fa-shopping-cart"></i> Place Order</button>
-      <div id="order-success" class="success-message">
-        Thank you for your order! We'll process it and contact you shortly.
-      </div>
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/mkgrnlww" method="post" onsubmit="showPopup()">
+      <input type="text" name="name" required placeholder="Your Name">
+      <input type="email" name="email" required placeholder="Your Email">
+      <textarea name="message" rows="5" required placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
     </form>
-  </div>
-</div>
+  </section>
 
-<!-- Customer Support Button -->
-<div class="support-button" id="support-button">
-  <i class="fas fa-headset"></i>
-</div>
+  <footer>
+    &copy; 2025 P & D Essentials. All rights reserved.
+  </footer>
 
-<div class="support-popup" id="support-popup">
-  <span class="support-close" id="support-close">&times;</span>
-  <h4>Need Help?</h4>
-  <p>Our customer support team is here to assist you with any questions or concerns.</p>
-  <p>Email us directly at:</p>
-  <a href="mailto:pdessentials26632@gmail.com">pdessentials26632@gmail.com</a>
-  <p>We typically respond within 24 hours.</p>
-</div>
+  <script>
+    const sheetId = '1B8Ayk10CEHeDZew3Fl7MyyJXDhHHvj4V-VqEKqTA2E8';
+    const apiUrl = `https://opensheet.elk.sh/${sheetId}/Sheet1`;
 
-<footer>
-  <div class="footer-content">
-    <div class="footer-column">
-      <h3>P & D Essentials</h3>
-      <p>Your trusted source for quality everyday products at affordable prices.</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-      </div>
-    </div>
-    <div class="footer-column">
-      <h3>Quick Links</h3>
-      <a href="#products">Products</a>
-      <a href="#about">About Us</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="footer-column">
-      <h3>Contact Info</h3>
-      <a href="mailto:pdessentials26632@gmail.com">pdessentials26632@gmail.com</a>
-      <p>+1 (123) 456-7890</p>
-    </div>
-  </div>
-  <div class="copyright">
-    &copy; 2025 P & D Essentials. All Rights Reserved.
-  </div>
-</footer>
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const productList = document.getElementById('product-list');
+        data.forEach(product => {
+          const title = product.producttitle;
+          const description = product.description;
+          const price = product.price;
+          const imageUrl = product.imageurl;
 
-<script>
-  // Google Sheets Integration
-  const sheetId = '1B8Ayk10CEHeDZew3Fl7MyyJXDhHHvj4V-VqEKqTA2E8';
-  const sheetName = 'Sheet1'; // Change if your sheet has a different name
-  const apiUrl = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
-
-  // Initialize product buttons
-  function initProductButtons() {
-    const orderPopup = document.getElementById('order-popup');
-    const closePopup = document.getElementById('close-popup');
-    const popupForm = document.getElementById('popup-form');
-    const productNameField = document.getElementById('product-name-field');
-    const orderTitle = document.getElementById('order-title');
-    const orderSuccess = document.getElementById('order-success');
-
-    document.querySelectorAll('.product-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const productName = button.getAttribute('data-title');
-        productNameField.value = productName;
-        orderTitle.textContent = `Order: ${productName}`;
-        orderPopup.classList.add('active');
-        orderSuccess.style.display = 'none';
-      });
-    });
-
-    closePopup.addEventListener('click', () => {
-      orderPopup.classList.remove('active');
-    });
-
-    popupForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      try {
-        const formData = new FormData(this);
-        const response = await fetch(this.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
+          if (title && description && price && imageUrl) {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+              <img src="${imageUrl}" alt="${title}" />
+              <div class="product-content">
+                <h3>${title}</h3>
+                <p>${description}</p>
+                <p class="product-price">${price}</p>
+                <button class="product-button" data-product-name="${title}">Order Now</button>
+              </div>
+              <div class="order-form" id="order-form-${title.replace(/\s+/g, '-').toLowerCase()}">
+                <h3>Order: ${title}</h3>
+                <form action="https://formspree.io/f/mkgrnlww" method="post" onsubmit="showPopup()">
+                  <input type="text" name="customer-name" required placeholder="Your Name">
+                  <input type="email" name="customer-email" required placeholder="Your Email">
+                  <textarea name="address" rows="3" required placeholder="Address"></textarea>
+                  <input type="tel" name="phone" placeholder="Phone Number">
+                  <input type="number" name="quantity" value="1" min="1">
+                  <input type="hidden" name="product-name" value="${title}">
+                  <button type="submit">Place Order</button>
+                </form>
+              </div>
+            `;
+            productList.appendChild(productCard);
           }
         });
-        
-        if (response.ok) {
-          orderSuccess.style.display = 'block';
-          popupForm.reset();
-          setTimeout(() => {
-            orderPopup.classList.remove('active');
-            orderSuccess.style.display = 'none';
-          }, 3000);
-        } else {
-          throw new Error('Form submission failed');
-        }
-      } catch (error) {
-        alert('There was a problem submitting your order. Please try again.');
-        console.error('Order submission error:', error);
-      }
-    });
-  }
 
-  // Fetch products from Google Sheets
-  async function fetchProducts() {
-    try {
-      const response = await fetch(apiUrl);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const products = await response.json();
-      const productList = document.getElementById('product-list');
-      
-      document.getElementById('loader').style.display = 'none';
-      productList.innerHTML = '';
-      
-      if (products.length === 0) {
-        productList.innerHTML = '<p>No products found in the sheet.</p>';
-        return;
-      }
-      
-      products.forEach(product => {
-        // Skip if required fields are missing
-        if (!product.producttitle || !product.price) return;
-        
-        const productCard = document.createElement('div');
-        productCard.classList.add('product-card');
-        
-        // Add badge if product is featured
-        const badge = product.featured === 'TRUE' ? 
-          '<span class="product-badge">Featured</span>' : '';
-        
-        // Add rating stars if available
-        const rating = product.rating ? 
-          `<div class="product-rating">${'★'.repeat(Math.round(product.rating))}${'☆'.repeat(5 - Math.round(product.rating))}</div>` : '';
-        
-        productCard.innerHTML = `
-          <div class="product-image">
-            ${badge}
-            <img src="${product.imageurl || 'https://via.placeholder.com/300x200?text=No+Image'}" 
-                 alt="${product.producttitle}" 
-                 loading="lazy">
-          </div>
-          <div class="product-content">
-            <h3>${product.producttitle}</h3>
-            ${product.description ? `<p>${product.description}</p>` : ''}
-            ${rating}
-            <p class="product-price">₹${product.price}</p>
-            <button class="product-button" data-title="${product.producttitle}">
-              <i class="fas fa-shopping-cart"></i> Order Now
-            </button>
-          </div>
-        `;
-        productList.appendChild(productCard);
-      });
-      
-      initProductButtons();
-      
-    } catch (error) {
-      console.error('Fetch error:', error);
-      document.getElementById('loader').innerHTML = `
-        <p style="color: red;">Error loading products: ${error.message}</p>
-        <p>Possible solutions:</p>
-        <ol>
-          <li>Make sure your Google Sheet is shared publicly (Anyone with link can view)</li>
-          <li>Check that column names match: producttitle, description, price, imageurl</li>
-          <li>Try refreshing the page in 1-2 minutes</li>
-        </ol>
-        <button onclick="fetchProducts()" class="product-button" style="margin-top: 1rem;">
-          <i class="fas fa-sync-alt"></i> Try Again
-        </button>
-      `;
+        const orderButtons = document.querySelectorAll('.product-button');
+        orderButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const productName = this.dataset.productName;
+            const orderFormId = `order-form-${productName.replace(/\s+/g, '-').toLowerCase()}`;
+            const orderForm = document.getElementById(orderFormId);
+            if (orderForm) {
+              orderForm.style.display = 'block';
+              orderForm.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        });
+      })
+      .catch(error => console.error('Error loading products:', error));
+
+    function showPopup() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 3000);
     }
-  }
-
-  // Initialize contact form
-  function initContactForm() {
-    const contactForm = document.getElementById('contact-form');
-    const contactSuccess = document.getElementById('contact-success');
-    
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      try {
-        const formData = new FormData(this);
-        const response = await fetch(this.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        
-        if (response.ok) {
-          contactSuccess.style.display = 'block';
-          contactForm.reset();
-          setTimeout(() => {
-            contactSuccess.style.display = 'none';
-          }, 5000);
-        } else {
-          throw new Error('Form submission failed');
-        }
-      } catch (error) {
-        alert('There was a problem sending your message. Please try again.');
-        console.error('Contact form error:', error);
-      }
-    });
-  }
-
-  // Initialize support button
-  function initSupportButton() {
-    const supportButton = document.getElementById('support-button');
-    const supportPopup = document.getElementById('support-popup');
-    const supportClose = document.getElementById('support-close');
-    
-    supportButton.addEventListener('click', () => {
-      supportPopup.classList.toggle('active');
-    });
-    
-    supportClose.addEventListener('click', () => {
-      supportPopup.classList.remove('active');
-    });
-    
-    // Close when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!supportPopup.contains(e.target) && e.target !== supportButton) {
-        supportPopup.classList.remove('active');
-      }
-    });
-  }
-
-  // Initialize everything when DOM is loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    fetchProducts();
-    initContactForm();
-    initSupportButton();
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  });
-</script>
+  </script>
 
 </body>
 </html>
