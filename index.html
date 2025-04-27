@@ -708,84 +708,10 @@
 <script>
   // Google Sheets Integration
   const sheetId = '1B8Ayk10CEHeDZew3Fl7MyyJXDhHHvj4V-VqEKqTA2E8';
-  const apiKey = 'AIzaSyBxVx2QJq8YQ3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q'; // Replace with your actual API key
-  const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1?key=${apiKey}`;
-  
-  // Fetch products from Google Sheets
-  async function fetchProducts() {
-    try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error('Failed to fetch products');
-      }
-      const data = await response.json();
-      
-      // Hide loader
-      document.getElementById('loader').style.display = 'none';
-      
-      // Process and display products
-      if (data.values && data.values.length > 1) {
-        const headers = data.values[0];
-        const products = data.values.slice(1);
-        const productList = document.getElementById('product-list');
-        
-        products.forEach((product, index) => {
-          if (product.length >= headers.length) {
-            const productObj = {};
-            headers.forEach((header, i) => {
-              productObj[header.toLowerCase()] = product[i];
-            });
-            
-            // Only display if required fields exist
-            if (productObj.producttitle && productObj.price && productObj.imageurl) {
-              const productCard = document.createElement('div');
-              productCard.classList.add('product-card');
-              
-              // Add badge if product is featured
-              const badge = productObj.featured === 'TRUE' ? 
-                '<span class="product-badge">Featured</span>' : '';
-              
-              // Add rating stars if available
-              const rating = productObj.rating ? 
-                `<div class="product-rating">${'★'.repeat(Math.round(productObj.rating))}${'☆'.repeat(5 - Math.round(productObj.rating))}</div>` : '';
-              
-              productCard.innerHTML = `
-                <div class="product-image">
-                  ${badge}
-                  <img src="${productObj.imageurl}" alt="${productObj.producttitle}" loading="lazy">
-                </div>
-                <div class="product-content">
-                  <h3>${productObj.producttitle}</h3>
-                  ${productObj.description ? `<p>${productObj.description}</p>` : ''}
-                  ${rating}
-                  <p class="product-price">₹${productObj.price}</p>
-                  <button class="product-button" data-title="${productObj.producttitle}">
-                    <i class="fas fa-shopping-cart"></i> Order Now
-                  </button>
-                </div>
-              `;
-              productList.appendChild(productCard);
-            }
-          }
-        });
-        
-        // Initialize product buttons after loading
-        initProductButtons();
-      } else {
-        document.getElementById('loader').innerHTML = '<p>No products found. Please check back later.</p>';
-      }
-    } catch (error) {
-      console.error('Error loading products:', error);
-      document.getElementById('loader').innerHTML = `
-        <p>Failed to load products. Please refresh the page or try again later.</p>
-        <button onclick="fetchProducts()" class="btn-submit" style="margin-top: 1rem;">
-          <i class="fas fa-sync-alt"></i> Retry
-        </button>
-      `;
-    }
-  }
-  
-  // Initialize product order buttons
+  const sheetName = 'Sheet1'; // Change if your sheet has a different name
+  const apiUrl = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
+
+  // Initialize product buttons
   function initProductButtons() {
     const orderPopup = document.getElementById('order-popup');
     const closePopup = document.getElementById('close-popup');
@@ -793,7 +719,7 @@
     const productNameField = document.getElementById('product-name-field');
     const orderTitle = document.getElementById('order-title');
     const orderSuccess = document.getElementById('order-success');
-    
+
     document.querySelectorAll('.product-button').forEach(button => {
       button.addEventListener('click', () => {
         const productName = button.getAttribute('data-title');
@@ -803,11 +729,11 @@
         orderSuccess.style.display = 'none';
       });
     });
-    
+
     closePopup.addEventListener('click', () => {
       orderPopup.classList.remove('active');
     });
-    
+
     popupForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       
@@ -837,7 +763,81 @@
       }
     });
   }
-  
+
+  // Fetch products from Google Sheets
+  async function fetchProducts() {
+    try {
+      const response = await fetch(apiUrl);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const products = await response.json();
+      const productList = document.getElementById('product-list');
+      
+      document.getElementById('loader').style.display = 'none';
+      productList.innerHTML = '';
+      
+      if (products.length === 0) {
+        productList.innerHTML = '<p>No products found in the sheet.</p>';
+        return;
+      }
+      
+      products.forEach(product => {
+        // Skip if required fields are missing
+        if (!product.producttitle || !product.price) return;
+        
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+        
+        // Add badge if product is featured
+        const badge = product.featured === 'TRUE' ? 
+          '<span class="product-badge">Featured</span>' : '';
+        
+        // Add rating stars if available
+        const rating = product.rating ? 
+          `<div class="product-rating">${'★'.repeat(Math.round(product.rating))}${'☆'.repeat(5 - Math.round(product.rating))}</div>` : '';
+        
+        productCard.innerHTML = `
+          <div class="product-image">
+            ${badge}
+            <img src="${product.imageurl || 'https://via.placeholder.com/300x200?text=No+Image'}" 
+                 alt="${product.producttitle}" 
+                 loading="lazy">
+          </div>
+          <div class="product-content">
+            <h3>${product.producttitle}</h3>
+            ${product.description ? `<p>${product.description}</p>` : ''}
+            ${rating}
+            <p class="product-price">₹${product.price}</p>
+            <button class="product-button" data-title="${product.producttitle}">
+              <i class="fas fa-shopping-cart"></i> Order Now
+            </button>
+          </div>
+        `;
+        productList.appendChild(productCard);
+      });
+      
+      initProductButtons();
+      
+    } catch (error) {
+      console.error('Fetch error:', error);
+      document.getElementById('loader').innerHTML = `
+        <p style="color: red;">Error loading products: ${error.message}</p>
+        <p>Possible solutions:</p>
+        <ol>
+          <li>Make sure your Google Sheet is shared publicly (Anyone with link can view)</li>
+          <li>Check that column names match: producttitle, description, price, imageurl</li>
+          <li>Try refreshing the page in 1-2 minutes</li>
+        </ol>
+        <button onclick="fetchProducts()" class="product-button" style="margin-top: 1rem;">
+          <i class="fas fa-sync-alt"></i> Try Again
+        </button>
+      `;
+    }
+  }
+
   // Initialize contact form
   function initContactForm() {
     const contactForm = document.getElementById('contact-form');
@@ -871,7 +871,7 @@
       }
     });
   }
-  
+
   // Initialize support button
   function initSupportButton() {
     const supportButton = document.getElementById('support-button');
@@ -893,7 +893,7 @@
       }
     });
   }
-  
+
   // Initialize everything when DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     fetchProducts();
