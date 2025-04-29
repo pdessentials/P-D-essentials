@@ -98,5 +98,76 @@
       orderData.value = cart.map(i => `${i.name} - ₹${i.price}`).join(', ');
     }
   </script>
+  <!-- Order Summary and Checkout -->
+<section class="container my-5" id="checkout">
+  <h2 class="mb-4">Your Cart</h2>
+  <ul class="list-group mb-3" id="cartItems"></ul>
+  <h4>Total: ₹<span id="totalAmount">0</span></h4>
+
+  <form id="orderForm" action="https://formspree.io/f/mkgrnlww" method="POST">
+    <input type="hidden" name="_subject" value="New Order from P & D Essentials">
+    <input type="hidden" name="cartSummary" id="cartSummaryField">
+    <input type="hidden" name="totalAmount" id="totalAmountField">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Your Name</label>
+      <input type="text" name="name" id="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Your Email</label>
+      <input type="email" name="email" id="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="mobile" class="form-label">Mobile Number</label>
+      <input type="tel" name="mobile" id="mobile" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Delivery Address</label>
+      <textarea name="address" id="address" rows="3" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Place Order</button>
+  </form>
+</section>
+
+<script>
+  const cartItemsList = document.getElementById('cartItems');
+  const totalAmountEl = document.getElementById('totalAmount');
+  const totalAmountField = document.getElementById('totalAmountField');
+  const cartSummaryField = document.getElementById('cartSummaryField');
+
+  function updateCartUI() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cartItemsList.innerHTML = '';
+    let total = 0;
+    let summary = [];
+
+    cart.forEach((item, index) => {
+      const li = document.createElement('li');
+      li.className = 'list-group-item d-flex justify-content-between align-items-center';
+      li.innerHTML = `
+        ${item.name} - ₹${item.price}
+        <button class="btn btn-sm btn-danger" onclick="removeCartItem(${index})">Remove</button>
+      `;
+      cartItemsList.appendChild(li);
+      total += parseFloat(item.price);
+      summary.push(`${item.name} - ₹${item.price}`);
+    });
+
+    totalAmountEl.textContent = total.toFixed(2);
+    totalAmountField.value = total.toFixed(2);
+    cartSummaryField.value = summary.join('\n');
+  }
+
+  function removeCartItem(index) {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartUI();
+  }
+
+  // Call on load
+  updateCartUI();
+</script>
+
 </body>
 </html>
