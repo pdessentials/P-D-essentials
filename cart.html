@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Your Cart</h1>
+    <a href="index.html">← Back to Shop</a>
+  </header>
+  <main>
+    <div id="cart-items"></div>
+    <form action="https://formspree.io/f/mkgrnlww" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="order" id="orderField" readonly></textarea>
+      <button type="submit">Place Order</button>
+    </form>
+  </main>
+  <script>
+    const items = JSON.parse(localStorage.getItem('cart') || '[]');
+    const container = document.getElementById('cart-items');
+    const orderField = document.getElementById('orderField');
+    let orderText = '';
+    items.forEach((item, index) => {
+      orderText += `${index+1}. ${item.name} - ₹${item.price}\n`;
+      container.innerHTML += `
+        <div class="product">
+          <img src="${item.image}" />
+          <h3>${item.name}</h3>
+          <p>₹${item.price}</p>
+        </div>
+      `;
+    });
+    orderField.value = orderText;
+  </script>
+</body>
+</html>
