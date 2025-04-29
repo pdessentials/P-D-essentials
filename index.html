@@ -1,236 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>P & D Essentials</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/891/891462.png" type="image/png">
-  <meta name="description" content="P & D Essentials - Your one-stop online shop for quality essentials at great prices.">
-  <meta name="keywords" content="P & D Essentials, Online Shopping, Essentials, Best Prices, Fast Delivery, Quality Products">
-  <meta name="author" content="P & D Essentials">
-  <meta property="og:title" content="P & D Essentials - Quality Essentials for You">
-  <meta property="og:description" content="Shop now at P & D Essentials for quality essentials delivered fast and at the best prices.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="YOUR_WEBSITE_URL_HERE">
-  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/891/891462.png">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    /* Add your CSS styling here */
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-    }
-    header {
-      background-color: #4CAF50;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    nav {
-      background-color: #fff;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    nav a {
-      margin: 0 1rem;
-      color: #4CAF50;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    nav a:hover {
-      color: #FF5722;
-    }
-    section {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      color: #4CAF50;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    .product-card {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    .product-card img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-    .product-content {
-      padding: 1rem;
-    }
-    .product-content h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-    .product-content p {
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-    }
-    .product-price {
-      font-weight: bold;
-      color: #FF5722;
-      margin-bottom: 0.5rem;
-    }
-    .product-button {
-      background: #FF5722;
-      color: #fff;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.3s;
-      font-size: 0.9rem;
-    }
-    .product-button:hover {
-      background: #E64A19;
-    }
-    footer {
-      background: #4CAF50;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-    }
-    .cart {
-      position: fixed;
-      top: 80px;
-      right: 20px;
-      width: 300px;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 1rem;
-      display: none;
-      z-index: 1000;
-    }
-    .cart h3 {
-      margin-top: 0;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
-    .cart-item p {
-      margin: 0;
-    }
-    .cart-total {
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-    .cart-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
-    }
-    .cart-buttons button {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .checkout-button {
-      background-color: #4CAF50;
-      color: white;
-    }
-    .clear-cart-button {
-      background-color: #f44336;
-      color: white;
-    }
-    .cart-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    @media (max-width: 768px) {
-      .products {
-        grid-template-columns: 1fr;
-      }
-      .cart {
-        width: 90%;
-        right: 5%;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>P & D Essentials</h1>
-    <p>Your one-stop shop for everyday products</p>
-  </header>
-  <nav>
-    <a href="#products">Products</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <button class="cart-toggle" onclick="toggleCart()">Cart (<span id="cart-count">0</span>)</button>
-  <div class="cart" id="cart">
-    <h3>Your Cart</h3>
-    <div id="cart-items"></div>
-    <p class="cart-total">Total: ₹<span id="cart-total">0</span></p>
-    <div class="cart-buttons">
-      <button class="checkout-button" onclick="checkout()">Checkout</button>
-      <button class="clear-cart-button" onclick="clearCart()">Clear Cart</button>
+import React, { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+const SHEET_ID = "1B8Ayk10CEHeDZew3Fl7MyyJXDhHHvj4V-VqEKqTA2E8";
+const API_KEY = "YOUR_GOOGLE_SHEETS_API_KEY"; // Replace with your actual API key
+const SHEET_NAME = "Sheet1";
+const FORM_ENDPOINT = "https://formspree.io/f/mkgrnlww";
+
+export default function Home() {
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const rows = data.values;
+        const headers = rows[0];
+        const items = rows.slice(1).map((row) => {
+          const obj = {};
+          headers.forEach((header, index) => {
+            obj[header] = row[index];
+          });
+          return obj;
+        });
+        setProducts(items);
+      });
+  }, []);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  return (
+    <div className="p-4 max-w-7xl mx-auto">
+      <header className="text-center mb-10">
+        <h1 className="text-4xl font-bold">P & D Essentials</h1>
+        <p className="text-lg text-gray-500">Your one-stop shop for everyday products</p>
+      </header>
+
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {products.map((product, idx) => (
+          <Card key={idx} className="hover:shadow-xl">
+            <CardContent className="p-4 text-center">
+              <img src={product.ImageURL} alt={product.Name} className="h-48 object-cover mx-auto" />
+              <h2 className="text-xl font-semibold mt-2">{product.Name}</h2>
+              <p className="text-gray-600">₹{product.Price}</p>
+              <Button className="mt-2" onClick={() => addToCart(product)}>Add to Cart</Button>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
+
+      <section className="mt-12">
+        <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
+        {cart.length === 0 ? (
+          <p>Your cart is empty</p>
+        ) : (
+          <ul className="space-y-2">
+            {cart.map((item, idx) => (
+              <li key={idx} className="border p-2 rounded">
+                {item.Name} - ₹{item.Price}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="mt-12">
+        <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+        <form action={FORM_ENDPOINT} method="POST" className="grid gap-4">
+          <Input name="name" placeholder="Your Name" required />
+          <Input type="email" name="email" placeholder="Your Email" required />
+          <Textarea name="message" placeholder="Your Message" required />
+          <Button type="submit">Send Message</Button>
+        </form>
+      </section>
+
+      <footer className="text-center mt-12 text-sm text-gray-500">
+        &copy; 2025 P & D Essentials. All rights reserved.
+      </footer>
     </div>
-  </div>
-  <section id="products">
-    <h2>Our Products</h2>
-    <div class="products" id="product-list"></div>
-  </section>
-  <section id="about">
-    <h2>About Us</h2>
-    <p style="text-align:center;">P & D Essentials is your go-to store for a variety of high-quality, everyday products. We focus on providing essential items that meet your needs with convenience, reliability, and style.</p>
-  </section>
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/mkgrnlww" method="post">
-      <input type="text" name="name" required placeholder="Your Name">
-      <input type="email" name="email" required placeholder="Your Email">
-      <textarea name="message" rows="5" required placeholder="Your Message"></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-  <footer>
-    &copy; 2025 P & D Essentials. All rights reserved.
-  </footer>
-  <!-- Customer Support Chat Widget -->
-  <script>
-    (function() {
-      var script = document.createElement('script');
-      script.src = 'https://example.com/chat-widget.js'; // Replace
-::contentReference[oaicite:21]{index=21}
- 
+  );
+}
