@@ -1,89 +1,52 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P & D Essentials</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>P & D Essentials</h1>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="cart.html">🛒 Cart</a>
+    </nav>
+  </header>
 
-const SHEET_ID = "1B8Ayk10CEHeDZew3Fl7MyyJXDhHHvj4V-VqEKqTA2E8";
-const API_KEY = "YOUR_GOOGLE_SHEETS_API_KEY"; // Replace with your actual API key
-const SHEET_NAME = "Sheet1";
-const FORM_ENDPOINT = "https://formspree.io/f/mkgrnlww";
+  <section id="hero">
+    <h2>Your one-stop shop for everyday products</h2>
+  </section>
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  <main>
+    <section id="products">
+      <h2>Our Products</h2>
+      <div id="product-list" class="grid"></div>
+    </section>
 
-  useEffect(() => {
-    fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const rows = data.values;
-        const headers = rows[0];
-        const items = rows.slice(1).map((row) => {
-          const obj = {};
-          headers.forEach((header, index) => {
-            obj[header] = row[index];
-          });
-          return obj;
-        });
-        setProducts(items);
-      });
-  }, []);
+    <section id="about">
+      <h2>About Us</h2>
+      <p>P & D Essentials offers quality, everyday essentials at affordable prices. We focus on convenience, reliability, and style.</p>
+    </section>
 
-  const addToCart = (product) => {
-    setCart([...cart, product]);
-  };
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form action="https://formspree.io/f/mkgrnlww" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
 
-  return (
-    <div className="p-4 max-w-7xl mx-auto">
-      <header className="text-center mb-10">
-        <h1 className="text-4xl font-bold">P & D Essentials</h1>
-        <p className="text-lg text-gray-500">Your one-stop shop for everyday products</p>
-      </header>
+  <footer>
+    <p>© 2025 P & D Essentials. All rights reserved.</p>
+  </footer>
 
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {products.map((product, idx) => (
-          <Card key={idx} className="hover:shadow-xl">
-            <CardContent className="p-4 text-center">
-              <img src={product.ImageURL} alt={product.Name} className="h-48 object-cover mx-auto" />
-              <h2 className="text-xl font-semibold mt-2">{product.Name}</h2>
-              <p className="text-gray-600">₹{product.Price}</p>
-              <Button className="mt-2" onClick={() => addToCart(product)}>Add to Cart</Button>
-            </CardContent>
-          </Card>
-        ))}
-      </section>
-
-      <section className="mt-12">
-        <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
-        {cart.length === 0 ? (
-          <p>Your cart is empty</p>
-        ) : (
-          <ul className="space-y-2">
-            {cart.map((item, idx) => (
-              <li key={idx} className="border p-2 rounded">
-                {item.Name} - ₹{item.Price}
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <section className="mt-12">
-        <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
-        <form action={FORM_ENDPOINT} method="POST" className="grid gap-4">
-          <Input name="name" placeholder="Your Name" required />
-          <Input type="email" name="email" placeholder="Your Email" required />
-          <Textarea name="message" placeholder="Your Message" required />
-          <Button type="submit">Send Message</Button>
-        </form>
-      </section>
-
-      <footer className="text-center mt-12 text-sm text-gray-500">
-        &copy; 2025 P & D Essentials. All rights reserved.
-      </footer>
-    </div>
-  );
-}
+  <script src="script.js"></script>
+</body>
+</html>
