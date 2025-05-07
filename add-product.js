@@ -1,4 +1,3 @@
-// File: frontend/pages/add-product.js
 import { useState } from 'react';
 
 export default function AddProduct() {
