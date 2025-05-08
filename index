@@ -1,0 +1,160 @@
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Link, useParams } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+const initialProducts = [
+  {
+    id: "1",
+    name: "Hydrating Face Cream",
+    category: "Skincare",
+    price: 499,
+    description: "A deeply hydrating face cream for daily use.",
+    image: "/images/face-cream.jpg",
+    sizes: ["50ml", "100ml"]
+  },
+  {
+    id: "2",
+    name: "Organic Lip Balm",
+    category: "Skincare",
+    price: 199,
+    description: "Organic lip balm with shea butter and beeswax.",
+    image: "/images/lip-balm.jpg",
+    sizes: []
+  },
+  {
+    id: "3",
+    name: "Aroma Scented Candle",
+    category: "Home Fragrance",
+    price: 299,
+    description: "Soothing lavender scented candle for home relaxation.",
+    image: "/images/candle.jpg",
+    sizes: ["Small", "Medium", "Large"]
+  }
+];
+
+function Home({ products }) {
+  const categories = [...new Set(products.map((p) => p.category))];
+  return (
+    <div className="p-4 space-y-6">
+      <h1 className="text-3xl font-bold text-center">Welcome to P&D ESSENTIALS</h1>
+      {categories.map((category) => (
+        <div key={category}>
+          <h2 className="text-xl font-semibold mb-2">{category}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {products
+              .filter((p) => p.category === category)
+              .map((product) => (
+                <Link to={`/product/${product.id}`} key={product.id}>
+                  <Card className="hover:shadow-xl transition">
+                    <CardContent>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-40 object-cover rounded"
+                      />
+                      <h3 className="text-lg font-bold mt-2">{product.name}</h3>
+                      <p className="text-sm text-gray-600">{product.description}</p>
+                      <p className="text-md font-semibold text-green-700 mt-1">₹{product.price}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProductPage({ products }) {
+  const { id } = useParams();
+  const product = products.find((p) => p.id === id);
+
+  if (!product) return <div className="p-4">Product not found.</div>;
+
+  return (
+    <div className="p-4">
+      <img src={product.image} alt={product.name} className="w-full h-64 object-cover rounded" />
+      <h2 className="text-2xl font-bold mt-4">{product.name}</h2>
+      <p className="text-gray-700 mt-2">{product.description}</p>
+      <p className="text-green-700 text-xl mt-2 font-semibold">₹{product.price}</p>
+      {product.sizes.length > 0 && (
+        <div className="mt-2">
+          <span className="font-semibold">Sizes: </span>
+          {product.sizes.join(", ")}
+        </div>
+      )}
+      <Button className="mt-4">Place Order</Button>
+    </div>
+  );
+}
+
+function Admin({ onAddProduct }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    category: "",
+    price: "",
+    description: "",
+    image: "",
+    sizes: ""
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newProduct = {
+      id: Date.now().toString(),
+      ...formData,
+      price: parseFloat(formData.price),
+      sizes: formData.sizes.split(",").map((s) => s.trim())
+    };
+    onAddProduct(newProduct);
+    setFormData({ name: "", category: "", price: "", description: "", image: "", sizes: "" });
+  };
+
+  return (
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Add a New Product</h2>
+      <form className="space-y-3" onSubmit={handleSubmit}>
+        {Object.entries(formData).map(([key, val]) => (
+          <input
+            key={key}
+            type="text"
+            name={key}
+            value={val}
+            onChange={handleChange}
+            placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+            className="w-full p-2 border rounded"
+          />
+        ))}
+        <Button type="submit">Add Product</Button>
+      </form>
+    </div>
+  );
+}
+
+export default function App() {
+  const [products, setProducts] = useState(initialProducts);
+
+  const addProduct = (product) => {
+    setProducts([...products, product]);
+  };
+
+  return (
+    <Router>
+      <div className="flex justify-between items-center p-4 shadow-md">
+        <Link to="/" className="text-xl font-bold">P&D ESSENTIALS</Link>
+        <Link to="/admin" className="text-blue-500">Admin Panel</Link>
+      </div>
+      <Routes>
+        <Route path="/" element={<Home products={products} />} />
+        <Route path="/product/:id" element={<ProductPage products={products} />} />
+        <Route path="/admin" element={<Admin onAddProduct={addProduct} />} />
+      </Routes>
+    </Router>
+  );
+}
