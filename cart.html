@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="main.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Your Cart</h1>
+    <a href="index.html">Continue Shopping</a>
+  </header>
+  <section id="cart-items"></section>
+  <footer>
+    <p><a href="order.html"><button>Proceed to Buy</button></a></p>
+  </footer>
+  <script>
+    const products = {};
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    fetch("products.json").then(res => res.json()).then(data => {
+      data.forEach(p => products[p.id] = p);
+      const section = document.getElementById("cart-items");
+      let total = 0;
+      cartItems.forEach(id => {
+        const item = products[id];
+        if (item) {
+          const div = document.createElement("div");
+          div.className = "product";
+          div.innerHTML = `<img src="${item.image}" /><h3>${item.name}</h3><p>${item.price}</p>`;
+          section.appendChild(div);
+          total += parseFloat(item.price.replace(/[₹,]/g, ''));
+        }
+      });
+      const totalDiv = document.createElement("div");
+      totalDiv.innerHTML = `<h2>Total: ₹${total}</h2>`;
+      section.appendChild(totalDiv);
+    });
+  </script>
+</body>
+</html>
